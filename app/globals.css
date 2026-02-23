@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Daydream';
+  src: url('/fonts/daydream.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --font-daydream: 'Daydream', cursive;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F5F0E8;
+  color: #3D3D3D;
+  font-family: var(--font-montserrat), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F0E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F4A7B9;
+  border-radius: 3px;
+}
+
+/* Watercolor blur effect helper */
+.watercolor {
+  filter: blur(1.5px) saturate(0.8);
+  opacity: 0.7;
+}
+
+/* Skeleton loader */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #EDE6D6 25%, #F5F0E8 50%, #EDE6D6 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  background: rgba(61, 61, 61, 0.45);
+  backdrop-filter: blur(4px);
+}
