@@ -1,13 +1,31 @@
 import { createClient } from '@supabase/supabase-js'
+import { getSupabaseAnonKey, getSupabaseUrl } from '@/lib/supabaseEnv'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder-url.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
+const supabaseUrl = getSupabaseUrl() || 'https://placeholder-url.supabase.co'
+const supabaseAnonKey = getSupabaseAnonKey() || 'placeholder-anon-key'
 
 if (supabaseUrl.includes('placeholder')) {
   console.warn('⚠️ Supabase URL no encontrada. Usando placeholder (el sitio no funcionará correctamente).')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+/** Mensaje más claro cuando el navegador/SSR no puede abrir conexión a Supabase */
+const supabaseFetch: typeof fetch = async (input, init) => {
+  try {
+    return await fetch(input, init)
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e)
+    if (msg === 'fetch failed' || msg.includes('Failed to fetch')) {
+      console.error(
+        '[Supabase] No se pudo conectar. Revisá: internet, firewall/antivirus, bloqueadores, y que NEXT_PUBLIC_SUPABASE_URL en .env.local sea exacta (sin espacios).'
+      )
+    }
+    throw e
+  }
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  global: { fetch: supabaseFetch },
+})
 
 export type WishlistItem = {
   id: string

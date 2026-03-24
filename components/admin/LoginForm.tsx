@@ -19,7 +19,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
         setError('')
 
         setTimeout(() => {
-            if (username === 'azulcita' && password === 'hannah') {
+            if (username === 'admin' && password === 'hannah') {
                 localStorage.setItem('hannah_admin_token', 'authenticated')
                 onLogin()
             } else {

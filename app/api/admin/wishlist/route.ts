@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { serviceRoleMisconfiguredResponse } from '@/lib/requireServiceRole'
 
 export async function GET() {
+    const cfg = serviceRoleMisconfiguredResponse()
+    if (cfg) return cfg
+
     const { data, error } = await supabaseAdmin
         .from('wishlist')
         .select('*')
@@ -16,8 +20,19 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-    const body = await req.json()
-    const { title, image_url, mercadolibre_url } = body
+    const cfg = serviceRoleMisconfiguredResponse()
+    if (cfg) return cfg
+
+    let body: Record<string, unknown>
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: 'Cuerpo JSON inválido' }, { status: 400 })
+    }
+
+    const title = typeof body.title === 'string' ? body.title.trim() : ''
+    const image_url = typeof body.image_url === 'string' ? body.image_url.trim() : ''
+    const mercadolibre_url = typeof body.mercadolibre_url === 'string' ? body.mercadolibre_url.trim() : ''
 
     if (!title) {
         return NextResponse.json({ error: 'title is required' }, { status: 400 })
@@ -42,20 +57,28 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-    const body = await req.json()
-    const { id, title, image_url, mercadolibre_url, reserved } = body
+    const cfg = serviceRoleMisconfiguredResponse()
+    if (cfg) return cfg
 
+    let body: Record<string, unknown>
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: 'Cuerpo JSON inválido' }, { status: 400 })
+    }
+    const id = typeof body.id === 'string' ? body.id : ''
     if (!id) {
         return NextResponse.json({ error: 'id is required' }, { status: 400 })
     }
 
     const update: Record<string, unknown> = {}
-    if (title !== undefined) update.title = title
-    if (image_url !== undefined) update.image_url = image_url || null
-    if (mercadolibre_url !== undefined) update.mercadolibre_url = mercadolibre_url || null
-    if (reserved !== undefined) {
-        update.reserved = reserved
-        if (!reserved) update.reserved_by = null
+    if (typeof body.title === 'string') update.title = body.title.trim()
+    if (typeof body.image_url === 'string') update.image_url = body.image_url.trim() || null
+    if (typeof body.mercadolibre_url === 'string')
+        update.mercadolibre_url = body.mercadolibre_url.trim() || null
+    if (typeof body.reserved === 'boolean') {
+        update.reserved = body.reserved
+        if (!body.reserved) update.reserved_by = null
     }
 
     const { data, error } = await supabaseAdmin
@@ -74,9 +97,16 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-    const body = await req.json()
-    const { id } = body
+    const cfg = serviceRoleMisconfiguredResponse()
+    if (cfg) return cfg
 
+    let body: Record<string, unknown>
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: 'Cuerpo JSON inválido' }, { status: 400 })
+    }
+    const id = typeof body.id === 'string' ? body.id : ''
     if (!id) {
         return NextResponse.json({ error: 'id is required' }, { status: 400 })
     }

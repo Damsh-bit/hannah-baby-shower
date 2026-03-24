@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
+import { serviceRoleMisconfiguredResponse } from '@/lib/requireServiceRole'
 
 export async function GET() {
+    const cfg = serviceRoleMisconfiguredResponse()
+    if (cfg) return cfg
+
     const { data, error } = await supabaseAdmin
         .from('rsvp')
         .select('*')

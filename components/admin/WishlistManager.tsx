@@ -72,19 +72,25 @@ export default function WishlistManager() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(form),
                 })
-                if (!res.ok) throw new Error()
+                const data = await res.json().catch(() => ({}))
+                if (!res.ok) {
+                    throw new Error(typeof data.error === 'string' ? data.error : 'Error al guardar')
+                }
             } else {
                 const res = await fetch('/api/admin/wishlist', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: editingId, ...form }),
                 })
-                if (!res.ok) throw new Error()
+                const data = await res.json().catch(() => ({}))
+                if (!res.ok) {
+                    throw new Error(typeof data.error === 'string' ? data.error : 'Error al guardar')
+                }
             }
             await fetchItems()
             setModalMode(null)
-        } catch {
-            setError('Error al guardar. Intentá de nuevo.')
+        } catch (e) {
+            setError(e instanceof Error ? e.message : 'Error al guardar. Intentá de nuevo.')
         } finally {
             setSaving(false)
         }
