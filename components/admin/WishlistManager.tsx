@@ -135,10 +135,10 @@ export default function WishlistManager() {
     return (
         <div>
             <div className="flex items-center justify-between mb-6">
-                <h2 className="font-body font-black text-2xl text-charcoal">Lista de Deseos</h2>
+                <h2 className="font-body font-black text-2xl md:text-3xl text-charcoal">Lista de Deseos</h2>
                 <button
                     onClick={openAdd}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink to-pink-dark text-white font-body font-semibold text-sm hover:scale-[1.02] transition-all shadow-md shadow-pink/25"
+                    className="px-5 py-3 rounded-xl bg-gradient-to-r from-pink to-pink-dark text-white font-body font-semibold text-base min-h-[44px] hover:scale-[1.02] transition-all shadow-md shadow-pink/25"
                 >
                     + Agregar producto
                 </button>
@@ -152,7 +152,7 @@ export default function WishlistManager() {
                 </div>
             ) : items.length === 0 ? (
                 <div className="text-center py-16 border-2 border-dashed border-pink/20 rounded-3xl">
-                    <p className="font-body text-charcoal/40">No hay productos en la lista todavía.</p>
+                    <p className="font-body text-charcoal-muted text-base leading-relaxed">No hay productos en la lista todavía.</p>
                 </div>
             ) : (
                 <div className="space-y-3">
@@ -182,21 +182,21 @@ export default function WishlistManager() {
 
                             {/* Info */}
                             <div className="flex-1 min-w-0">
-                                <p className="font-body font-semibold text-charcoal text-sm truncate">{item.title}</p>
+                                <p className="font-body font-semibold text-charcoal text-base truncate">{item.title}</p>
                                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                                     {item.reserved ? (
-                                        <span className="text-xs font-body text-pink-dark bg-pink-light/40 px-2 py-0.5 rounded-full">
+                                        <span className="text-sm font-body text-pink-dark bg-pink-light/40 px-2 py-1 rounded-full">
                                             💝 Reservado por: <strong>{item.reserved_by || '—'}</strong>
                                         </span>
                                     ) : (
-                                        <span className="text-xs font-body text-green-600 bg-green-50 px-2 py-0.5 rounded-full">✓ Disponible</span>
+                                        <span className="text-sm font-body text-green-800 bg-green-50 px-2 py-1 rounded-full">✓ Disponible</span>
                                     )}
                                     {item.mercadolibre_url && (
                                         <a
                                             href={item.mercadolibre_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-xs font-body text-yellow-600 hover:underline"
+                                            className="text-base font-body text-yellow-700 hover:underline"
                                         >
                                             ML ↗
                                         </a>
@@ -209,19 +209,19 @@ export default function WishlistManager() {
                                 <button
                                     onClick={() => handleToggleReserved(item)}
                                     title={item.reserved ? 'Marcar como disponible' : 'Marcar como reservado'}
-                                    className="px-3 py-1.5 rounded-lg text-xs font-body font-semibold border-2 border-charcoal/15 text-charcoal/50 hover:border-charcoal/30 transition-all"
+                                    className="px-3 py-2 rounded-lg text-base font-body font-semibold border-2 border-charcoal/25 text-charcoal-muted hover:border-charcoal/40 transition-all min-h-[40px]"
                                 >
                                     {item.reserved ? '↺ Liberar' : '✓ Reservar'}
                                 </button>
                                 <button
                                     onClick={() => openEdit(item)}
-                                    className="px-3 py-1.5 rounded-lg text-xs font-body font-semibold border-2 border-pink/30 text-pink-dark hover:bg-pink-light/30 transition-all"
+                                    className="px-3 py-2 rounded-lg text-base font-body font-semibold border-2 border-pink/30 text-pink-dark hover:bg-pink-light/30 transition-all min-h-[40px]"
                                 >
                                     Editar
                                 </button>
                                 <button
                                     onClick={() => setDeleteConfirmId(item.id)}
-                                    className="px-3 py-1.5 rounded-lg text-xs font-body font-semibold border-2 border-red-200 text-red-500 hover:bg-red-50 transition-all"
+                                    className="px-3 py-2 rounded-lg text-base font-body font-semibold border-2 border-red-200 text-red-600 hover:bg-red-50 transition-all min-h-[40px]"
                                 >
                                     Eliminar
                                 </button>
@@ -248,12 +248,12 @@ export default function WishlistManager() {
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
                             className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border-2 border-pink/20"
                         >
-                            <h3 className="font-script text-3xl text-pink-dark mb-6">
+                            <h3 className="font-script text-3xl md:text-4xl text-pink-dark mb-6">
                                 {modalMode === 'add' ? 'Agregar producto' : 'Editar producto'}
                             </h3>
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block font-body text-xs uppercase tracking-wider text-charcoal/50 mb-1.5">
+                                    <label className="block font-body text-base font-semibold text-charcoal-muted mb-2">
                                         Título del regalo *
                                     </label>
                                     <input
@@ -261,11 +261,11 @@ export default function WishlistManager() {
                                         value={form.title}
                                         onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                                         placeholder="Ej: Coche paraguas"
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-pink/30 bg-cream font-body text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-pink-dark transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl border-2 border-pink/30 bg-cream font-body text-base text-charcoal placeholder:text-charcoal-muted min-h-[48px] focus:outline-none focus:border-pink-dark transition-all"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block font-body text-xs uppercase tracking-wider text-charcoal/50 mb-1.5">
+                                    <label className="block font-body text-base font-semibold text-charcoal-muted mb-2">
                                         URL de imagen
                                     </label>
                                     <input
@@ -273,11 +273,11 @@ export default function WishlistManager() {
                                         value={form.image_url}
                                         onChange={(e) => setForm((f) => ({ ...f, image_url: e.target.value }))}
                                         placeholder="https://i.imgur.com/..."
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-pink/30 bg-cream font-body text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-pink-dark transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl border-2 border-pink/30 bg-cream font-body text-base text-charcoal placeholder:text-charcoal-muted min-h-[48px] focus:outline-none focus:border-pink-dark transition-all"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block font-body text-xs uppercase tracking-wider text-charcoal/50 mb-1.5">
+                                    <label className="block font-body text-base font-semibold text-charcoal-muted mb-2">
                                         URL de Mercado Libre (opcional)
                                     </label>
                                     <input
@@ -285,21 +285,21 @@ export default function WishlistManager() {
                                         value={form.mercadolibre_url}
                                         onChange={(e) => setForm((f) => ({ ...f, mercadolibre_url: e.target.value }))}
                                         placeholder="https://www.mercadolibre.com.ar/..."
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-pink/30 bg-cream font-body text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-pink-dark transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl border-2 border-pink/30 bg-cream font-body text-base text-charcoal placeholder:text-charcoal-muted min-h-[48px] focus:outline-none focus:border-pink-dark transition-all"
                                     />
                                 </div>
-                                {error && <p className="text-pink-dark font-body text-sm">{error}</p>}
+                                {error && <p className="text-pink-dark font-body text-base leading-relaxed">{error}</p>}
                                 <div className="flex gap-3 pt-2">
                                     <button
                                         onClick={() => setModalMode(null)}
-                                        className="flex-1 px-4 py-3 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-sm text-charcoal/60 hover:border-charcoal/40 transition-all"
+                                        className="flex-1 px-4 py-3.5 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-base text-charcoal-muted hover:border-charcoal/40 transition-all min-h-[48px]"
                                     >
                                         Cancelar
                                     </button>
                                     <button
                                         onClick={handleSave}
                                         disabled={saving}
-                                        className="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-pink to-pink-dark text-white font-body font-bold text-sm hover:scale-[1.02] transition-all disabled:opacity-60"
+                                        className="flex-1 px-4 py-3.5 rounded-xl bg-gradient-to-r from-pink to-pink-dark text-white font-body font-bold text-base hover:scale-[1.02] transition-all disabled:opacity-60 min-h-[48px]"
                                     >
                                         {saving ? 'Guardando...' : modalMode === 'add' ? 'Agregar' : 'Guardar cambios'}
                                     </button>
@@ -327,17 +327,17 @@ export default function WishlistManager() {
                             className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl border-2 border-red-100"
                         >
                             <p className="font-body font-bold text-charcoal text-lg mb-2">¿Eliminar este producto?</p>
-                            <p className="font-body text-charcoal/50 text-sm mb-6">Esta acción no se puede deshacer.</p>
+                            <p className="font-body text-charcoal-muted text-base mb-6 leading-relaxed">Esta acción no se puede deshacer.</p>
                             <div className="flex gap-3">
                                 <button
                                     onClick={() => setDeleteConfirmId(null)}
-                                    className="flex-1 px-4 py-3 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-sm text-charcoal/60 hover:border-charcoal/40 transition-all"
+                                    className="flex-1 px-4 py-3.5 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-base text-charcoal-muted hover:border-charcoal/40 transition-all min-h-[48px]"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     onClick={() => handleDelete(deleteConfirmId)}
-                                    className="flex-1 px-4 py-3 rounded-xl bg-red-500 text-white font-body font-bold text-sm hover:bg-red-600 transition-all"
+                                    className="flex-1 px-4 py-3.5 rounded-xl bg-red-500 text-white font-body font-bold text-base hover:bg-red-600 transition-all min-h-[48px]"
                                 >
                                     Sí, eliminar
                                 </button>

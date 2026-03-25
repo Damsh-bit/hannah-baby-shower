@@ -68,7 +68,7 @@ export default function Hero() {
             <div className="z-20 text-center px-4 flex flex-col items-center gap-1 pt-24 pb-8">
                 <motion.p
                     {...fadeUp(0.1)}
-                    className="text-sm md:text-base italic text-charcoal/70 tracking-widest uppercase font-body"
+                    className="text-base md:text-lg italic text-charcoal-soft tracking-widest uppercase font-body leading-relaxed"
                 >
                     Están invitados al:
                 </motion.p>
@@ -86,7 +86,7 @@ export default function Hero() {
 
                 <motion.p
                     {...fadeUp(0.55)}
-                    className="font-body font-semibold text-sm md:text-lg uppercase tracking-[0.35em] text-charcoal/60"
+                    className="font-body font-semibold text-base md:text-lg uppercase tracking-[0.35em] text-charcoal-muted leading-relaxed"
                 >
                     de
                 </motion.p>
@@ -109,9 +109,9 @@ export default function Hero() {
                 >
                     {/* Column 1 */}
                     <div className="px-5 py-2">
-                        <p className="font-body font-semibold text-charcoal text-sm md:text-base">Domingo</p>
+                        <p className="font-body font-semibold text-charcoal text-base md:text-lg leading-relaxed">Domingo</p>
                         <p className="font-body font-black text-3xl md:text-4xl text-charcoal">12</p>
-                        <p className="font-body font-semibold text-charcoal text-sm md:text-base">Abril</p>
+                        <p className="font-body font-semibold text-charcoal text-base md:text-lg leading-relaxed">Abril</p>
                     </div>
 
                     {/* Divider */}
@@ -120,9 +120,9 @@ export default function Hero() {
 
                     {/* Column 2 */}
                     <div className="px-5 py-2">
-                        <p className="font-body font-semibold text-charcoal text-sm md:text-base">Mundo Eventos</p>
-                        <p className="font-body text-charcoal/70 text-xs md:text-sm">Alsina 3051</p>
-                        <p className="font-body text-charcoal/70 text-xs md:text-sm">Claypole</p>
+                        <p className="font-body font-semibold text-charcoal text-base md:text-lg leading-relaxed">Mundo Eventos</p>
+                        <p className="font-body text-charcoal-muted text-base leading-relaxed">Alsina 3051</p>
+                        <p className="font-body text-charcoal-muted text-base leading-relaxed">Claypole</p>
                     </div>
 
                     {/* Divider */}
@@ -131,9 +131,9 @@ export default function Hero() {
 
                     {/* Column 3 */}
                     <div className="px-5 py-2">
-                        <p className="font-body font-semibold text-charcoal text-sm md:text-base">Hora</p>
-                        <p className="font-body font-black text-xl md:text-2xl text-charcoal">17:00 a 20:00</p>
-                        <p className="font-body text-charcoal/60 text-sm">(Puntualidad por favor)</p>
+                        <p className="font-body font-semibold text-charcoal text-base md:text-lg leading-relaxed">Hora</p>
+                        <p className="font-body font-black text-xl md:text-2xl text-charcoal leading-relaxed">17:00 a 20:00</p>
+                        <p className="font-body text-charcoal-muted text-base leading-relaxed">(Puntualidad por favor)</p>
                     </div>
                 </motion.div>
 
@@ -143,8 +143,8 @@ export default function Hero() {
                 </motion.p>
 
                 {/* Scroll hint */}
-                <motion.div {...fadeUp(1.2)} className="mt-8 flex flex-col items-center gap-1 opacity-50">
-                    <span className="text-xs font-body text-charcoal/50 uppercase tracking-widest">Deslizá</span>
+                <motion.div {...fadeUp(1.2)} className="mt-8 flex flex-col items-center gap-1 opacity-70">
+                    <span className="text-base font-body text-charcoal-muted uppercase tracking-widest">Deslizá</span>
                     <div className="w-px h-8 bg-pink animate-bounce" />
                 </motion.div>
             </div>

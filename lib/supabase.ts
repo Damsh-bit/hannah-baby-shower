@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
-import { getSupabaseAnonKey, getSupabaseUrl } from '@/lib/supabaseEnv'
+import { getSupabaseAnonKey, getSupabaseUrl, warnIfSupabaseEnvInconsistent } from '@/lib/supabaseEnv'
+
+warnIfSupabaseEnvInconsistent()
 
 const supabaseUrl = getSupabaseUrl() || 'https://placeholder-url.supabase.co'
 const supabaseAnonKey = getSupabaseAnonKey() || 'placeholder-anon-key'

@@ -12,10 +12,14 @@ export default function HomePage() {
       <WishlistSection />
 
       {/* Footer */}
-      <footer className="w-full py-10 bg-cream text-center border-t border-pink/20">
-        <p className="font-script text-3xl text-pink-dark">Baby Shower de Hannah 🦕</p>
-        <p className="font-body text-charcoal/35 text-xs mt-2">Domingo 12 de Abril · Mundo Eventos, Claypole</p>
-        <p className="font-body text-charcoal/25 text-xs mt-1">con amor, Familia Coronel-Herrera 💕</p>
+      <footer className="w-full py-12 md:py-14 bg-cream text-center border-t border-pink/20 px-4">
+        <p className="font-script text-3xl md:text-4xl text-pink-dark">Baby Shower de Hannah 🦕</p>
+        <p className="font-body text-charcoal-muted text-base md:text-lg mt-3 leading-relaxed">
+          Domingo 12 de Abril · Mundo Eventos, Claypole
+        </p>
+        <p className="font-body text-charcoal-muted text-base md:text-lg mt-2 leading-relaxed">
+          con amor, Familia Coronel-Herrera 💕
+        </p>
       </footer>
     </main>
   )

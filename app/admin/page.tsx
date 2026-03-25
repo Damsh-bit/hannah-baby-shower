@@ -51,12 +51,12 @@ export default function AdminPage() {
                     <span className="text-2xl">🦕</span>
                     <div>
                         <p className="font-body font-black text-charcoal text-base leading-none">Panel de Admin</p>
-                        <p className="font-body text-charcoal/40 text-xs">Baby Shower de Hannah</p>
+                        <p className="font-body text-charcoal-muted text-base">Baby Shower de Hannah</p>
                     </div>
                 </div>
                 <button
                     onClick={handleLogout}
-                    className="px-4 py-2 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-sm text-charcoal/50 hover:border-charcoal/40 hover:text-charcoal transition-all"
+                    className="px-4 py-2.5 rounded-xl border-2 border-charcoal/20 font-body font-semibold text-base text-charcoal-muted hover:border-charcoal/40 hover:text-charcoal transition-all min-h-[44px]"
                 >
                     Cerrar sesión
                 </button>

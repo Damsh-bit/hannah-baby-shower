@@ -1,9 +1,11 @@
 import { setDefaultResultOrder } from 'node:dns'
 import { createClient } from '@supabase/supabase-js'
-import { getSupabaseServiceRoleKey, getSupabaseUrl } from '@/lib/supabaseEnv'
+import { getSupabaseServiceRoleKey, getSupabaseUrl, warnIfSupabaseEnvInconsistent } from '@/lib/supabaseEnv'
 
 // Evita "fetch failed" en Windows/Node al preferir IPv4 para *.supabase.co
 setDefaultResultOrder('ipv4first')
+
+warnIfSupabaseEnvInconsistent()
 
 const supabaseUrl = getSupabaseUrl() || 'https://placeholder-url.supabase.co'
 const serviceRoleKey = getSupabaseServiceRoleKey() || 'placeholder-service-role-key'

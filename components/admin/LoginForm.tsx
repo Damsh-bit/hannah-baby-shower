@@ -46,13 +46,13 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                     <div className="text-center mb-8">
                         <span className="text-4xl">🦕</span>
                         <h1 className="font-script text-4xl text-pink-dark mt-2">Panel de Administración</h1>
-                        <p className="font-body text-charcoal/40 text-sm mt-2">Baby Shower de Hannah</p>
+                        <p className="font-body text-charcoal-muted text-base mt-2 leading-relaxed">Baby Shower de Hannah</p>
                     </div>
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block font-body text-xs uppercase tracking-wider text-charcoal/50 mb-1.5">
+                            <label className="block font-body text-base font-semibold text-charcoal-muted mb-2">
                                 Usuario
                             </label>
                             <input
@@ -62,14 +62,14 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                                 placeholder="Usuario..."
                                 autoComplete="username"
                                 className="
-                  w-full px-4 py-3 rounded-xl border-2 border-pink/30 bg-cream
-                  font-body text-charcoal placeholder:text-charcoal/30
+                  w-full px-4 py-3.5 rounded-xl border-2 border-pink/30 bg-cream text-base
+                  font-body text-charcoal placeholder:text-charcoal-muted min-h-[48px]
                   focus:outline-none focus:border-pink-dark transition-all duration-200
                 "
                             />
                         </div>
                         <div>
-                            <label className="block font-body text-xs uppercase tracking-wider text-charcoal/50 mb-1.5">
+                            <label className="block font-body text-base font-semibold text-charcoal-muted mb-2">
                                 Contraseña
                             </label>
                             <input
@@ -79,8 +79,8 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                                 placeholder="Contraseña..."
                                 autoComplete="current-password"
                                 className="
-                  w-full px-4 py-3 rounded-xl border-2 border-pink/30 bg-cream
-                  font-body text-charcoal placeholder:text-charcoal/30
+                  w-full px-4 py-3.5 rounded-xl border-2 border-pink/30 bg-cream text-base
+                  font-body text-charcoal placeholder:text-charcoal-muted min-h-[48px]
                   focus:outline-none focus:border-pink-dark transition-all duration-200
                 "
                             />
@@ -90,7 +90,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                             <motion.p
                                 initial={{ opacity: 0, x: -5 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="font-body text-pink-dark text-sm bg-pink-light/30 px-4 py-2 rounded-xl"
+                                className="font-body text-pink-dark text-base bg-pink-light/30 px-4 py-2 rounded-xl leading-relaxed"
                             >
                                 {error}
                             </motion.p>

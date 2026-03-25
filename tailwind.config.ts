@@ -21,6 +21,13 @@ const config: Config = {
           dark: '#F0C060',
         },
         charcoal: '#3D3D3D',
+        // Texto secundario con contraste ≥ WCAG AA sobre cream (~4.5:1)
+        'charcoal-muted': '#575757',
+        'charcoal-soft': '#4a4a4a',
+      },
+      fontSize: {
+        'section-mobile': ['1.75rem', { lineHeight: '1.2' }], // 28px
+        'section-desktop': ['2.25rem', { lineHeight: '1.15' }], // 36px
       },
       fontFamily: {
         script: ['var(--font-daydream)', 'cursive'],

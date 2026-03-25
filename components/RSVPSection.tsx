@@ -9,6 +9,11 @@ type Attending = 'yes' | 'no' | null
 
 const RSVP_STORAGE_KEY = 'hannah_shower_rsvp_submitted'
 
+const nameLabel =
+    'Tu nombre y el de los invitados que te acompañan (ej: María, su pareja Juan y la nena)'
+const namePlaceholder =
+    'Ej: María, su pareja Juan y la nena'
+
 export default function RSVPSection() {
     const [choice, setChoice] = useState<Attending>(null)
     const [name, setName] = useState('')
@@ -47,7 +52,7 @@ export default function RSVPSection() {
 
     const handleSubmit = async () => {
         if (!name.trim()) {
-            setError('Por favor ingresá tu nombre 💕')
+            setError('Por favor ingresá tu nombre y el de quienes vienen con vos 💕')
             return
         }
         setError('')
@@ -73,21 +78,32 @@ export default function RSVPSection() {
     }
 
     return (
-        <section className="w-full py-20 px-4 bg-cream flex flex-col items-center">
+        <section
+            className="w-full py-16 md:py-24 px-4 bg-cream flex flex-col items-center"
+            aria-labelledby="rsvp-heading"
+        >
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="w-full max-w-xl text-center"
+                className="w-full max-w-2xl text-center"
             >
-                {/* Section heading */}
-                <h2 className="font-script text-5xl md:text-6xl text-pink-dark mb-2">¿Vas a poder venir?</h2>
-                <p className="font-body text-charcoal/50 text-sm mb-10">Confirmá tu asistencia para que podamos organizarnos 🦕</p>
+                <h2
+                    id="rsvp-heading"
+                    className="font-script text-section-mobile md:text-section-desktop text-pink-dark mb-3"
+                >
+                    ¿Vas a poder venir?
+                </h2>
+                <p className="font-body text-charcoal-muted text-base md:text-lg mb-10 leading-relaxed">
+                    Confirmá tu asistencia para que podamos organizarnos 🦕
+                </p>
 
                 {alreadyDone && !submitted ? (
                     <div className="rounded-3xl bg-pink-light/30 border border-pink p-8">
-                        <p className="font-body text-charcoal/70 text-base">Ya confirmaste tu asistencia anteriormente. ¡Gracias! 💕</p>
+                        <p className="font-body text-charcoal-soft text-base md:text-lg leading-relaxed">
+                            Ya confirmaste tu asistencia anteriormente. ¡Gracias! 💕
+                        </p>
                     </div>
                 ) : submitted ? (
                     <AnimatePresence>
@@ -100,10 +116,10 @@ export default function RSVPSection() {
                                     : 'bg-cream-dark border-charcoal/20'
                                 }`}
                         >
-                            <p className="font-script text-4xl mb-3 text-pink-dark">
+                            <p className="font-script text-4xl md:text-5xl mb-3 text-pink-dark">
                                 {choice === 'yes' ? '¡Yayyy! 🦕' : '¡Gracias! 💕'}
                             </p>
-                            <p className="font-body text-charcoal/70 text-base">
+                            <p className="font-body text-charcoal-soft text-base md:text-lg leading-relaxed">
                                 {choice === 'yes'
                                     ? 'Te esperamos con muchas ganas. Hannah está muy emocionada de verte!'
                                     : '¡Gracias por avisarnos! Te vamos a extrañar mucho 💕'}
@@ -112,12 +128,12 @@ export default function RSVPSection() {
                     </AnimatePresence>
                 ) : (
                     <>
-                        {/* Choice buttons */}
-                        <div className="flex gap-4 justify-center mb-6">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                             <button
+                                type="button"
                                 onClick={() => setChoice('yes')}
                                 className={`
-                  px-8 py-4 rounded-full font-body font-semibold text-base transition-all duration-300
+                  px-8 py-4 rounded-full font-body font-semibold text-base min-h-[48px] transition-all duration-300
                   ${choice === 'yes'
                                         ? 'bg-pink-dark text-white shadow-lg shadow-pink/40 scale-105'
                                         : 'bg-pink text-white hover:bg-pink-dark hover:scale-105 hover:shadow-lg hover:shadow-pink/40'}
@@ -126,19 +142,19 @@ export default function RSVPSection() {
                                 ✓ Sí, voy a ir!
                             </button>
                             <button
+                                type="button"
                                 onClick={() => setChoice('no')}
                                 className={`
-                  px-8 py-4 rounded-full font-body font-semibold text-base border-2 transition-all duration-300
+                  px-8 py-4 rounded-full font-body font-semibold text-base min-h-[48px] border-2 transition-all duration-300
                   ${choice === 'no'
                                         ? 'border-charcoal bg-charcoal text-white scale-105'
-                                        : 'border-charcoal/40 text-charcoal hover:border-charcoal hover:scale-105'}
+                                        : 'border-charcoal/50 text-charcoal hover:border-charcoal hover:scale-105'}
                 `}
                             >
                                 ✗ No podré ir
                             </button>
                         </div>
 
-                        {/* Name input (reveals on choice) */}
                         <AnimatePresence>
                             {choice !== null && (
                                 <motion.div
@@ -147,30 +163,44 @@ export default function RSVPSection() {
                                     animate={{ opacity: 1, height: 'auto' }}
                                     exit={{ opacity: 0, height: 0 }}
                                     transition={{ duration: 0.4, ease: 'easeOut' }}
-                                    className="overflow-hidden"
+                                    className="overflow-hidden text-left"
                                 >
-                                    <div className="mt-2 space-y-4">
+                                    <div className="mt-4 space-y-3">
+                                        <label
+                                            htmlFor="rsvp-names"
+                                            className="block font-body text-base font-semibold text-charcoal leading-snug"
+                                        >
+                                            {nameLabel}
+                                        </label>
                                         <input
+                                            id="rsvp-names"
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            placeholder="¿Cómo te llamás?"
+                                            placeholder={namePlaceholder}
                                             onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                                            autoComplete="name"
                                             className="
                         w-full px-5 py-4 rounded-2xl border-2 border-pink/40 bg-white
-                        font-body text-charcoal placeholder:text-charcoal/30
+                        font-body text-base text-charcoal placeholder:text-charcoal-muted
                         focus:outline-none focus:border-pink-dark focus:shadow-md focus:shadow-pink/20
-                        transition-all duration-200
+                        transition-all duration-200 min-h-[52px] leading-relaxed
                       "
                                         />
+                                        <p className="font-body text-base text-charcoal-muted leading-relaxed">
+                                            Incluí a todos con quienes vas a asistir: pareja, hijos, etc.
+                                        </p>
                                         {error && (
-                                            <p className="text-pink-dark font-body text-sm">{error}</p>
+                                            <p className="text-pink-dark font-body text-base leading-relaxed" role="alert">
+                                                {error}
+                                            </p>
                                         )}
                                         <button
+                                            type="button"
                                             onClick={handleSubmit}
                                             disabled={loading}
                                             className="
-                        w-full px-6 py-4 rounded-full font-body font-bold text-base
+                        w-full px-6 py-4 rounded-full font-body font-bold text-base min-h-[52px]
                         bg-gradient-to-r from-pink to-pink-dark text-white
                         hover:scale-[1.02] hover:shadow-lg hover:shadow-pink/40
                         active:scale-[0.98] transition-all duration-300
