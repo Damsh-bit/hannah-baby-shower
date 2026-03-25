@@ -25,8 +25,13 @@ export default function RSVPDashboard() {
         fetchRSVPs()
     }, [fetchRSVPs])
 
+    console.log("[v0] RSVPs data:", rsvps)
+    console.log("[v0] Attending values:", rsvps.map(r => ({ name: r.name, attending: r.attending, type: typeof r.attending })))
+    
     const confirmed = rsvps.filter((r) => r.attending)
     const declined = rsvps.filter((r) => !r.attending)
+    
+    console.log("[v0] Confirmed count:", confirmed.length, "Declined count:", declined.length)
 
     const formatDate = (dateStr: string) => {
         const d = new Date(dateStr)
